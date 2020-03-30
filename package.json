@@ -1,0 +1,27 @@
+{
+  "name": "mock-cmdr",
+  "version": "1.0.0",
+  "description": "Wiremock Client",
+  "main": "lib/index.js",
+  "repository": "git@github.com:ncjones/mock-cmdr.git",
+  "author": "Nathan Jones <nathan@ncjones.com>",
+  "license": "Apache-2.0",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest",
+    "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
+    "cucumber": "cucumber-js"
+  },
+  "devDependencies": {
+    "convict": "^5.2.0",
+    "cucumber": "^6.0.5",
+    "eslint": "^6.8.0",
+    "eslint-plugin-jest": "^23.8.2",
+    "factory-bot": "^6.1.4",
+    "jest": "^25.2.4",
+    "wait-on": "^4.0.1"
+  },
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}

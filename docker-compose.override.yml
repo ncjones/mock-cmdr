@@ -1,0 +1,6 @@
+version: "3"
+services:
+  cucumber:
+    image: node:12
+    volumes:
+      - .:/work

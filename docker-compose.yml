@@ -1,0 +1,18 @@
+version: "3"
+services:
+  wiremock:
+    image: rodolpheche/wiremock
+  cucumber:
+    image: node:12
+    depends_on: [ wiremock ]
+    working_dir: /work
+    volumes:
+      - .:/work
+    command:
+      - bash
+      - -c
+      - |
+        yarn wait-on tcp:wiremock:8080 &&
+        echo "
+        Skipping Cucumber. To execute Cucumber tests, run:
+        docker-compose run cucumber yarn cucumber"
