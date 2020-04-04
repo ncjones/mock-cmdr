@@ -23,6 +23,8 @@ class World {
     this.factory = factory;
     this.mockCmdr = mockCmdr;
     this.wiremock = wiremock;
+    // TODO support world binding in templates
+    // this.mockSession = new mockCmdr.Session({ bind: this });
   }
 }
 
