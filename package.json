@@ -1,6 +1,6 @@
 {
   "name": "mock-cmdr",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Wiremock Client",
   "main": "lib/index.js",
   "repository": "git@github.com:ncjones/mock-cmdr.git",
