@@ -16,4 +16,4 @@ jobs:
       script: yarn test
 
     - name: Cucumber
-      script: scripts/ci-cucumber.sh
+      script: docker-compose run cucumber yarn cucumber

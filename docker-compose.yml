@@ -3,6 +3,7 @@ services:
   wiremock:
     image: rodolpheche/wiremock
   cucumber:
+    image: node:12
     depends_on: [ wiremock ]
     working_dir: /work
     volumes:
@@ -15,13 +16,3 @@ services:
         echo "
         Skipping Cucumber. To execute Cucumber tests, run:
         docker-compose run cucumber yarn cucumber"
-  script:
-    image: node:12
-    working_dir: /work
-    volumes:
-      - .:/work
-    command:
-      - echo
-      - |
-        To execute a script, run:
-        docker-compose run script {command}
