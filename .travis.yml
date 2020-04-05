@@ -1,15 +1,20 @@
 language: node_js
 node_js:
-  - lts/*
+- lts/*
 cache: yarn
 jobs:
   include:
-
-    - name: Lint
-      script: yarn lint
-
-    - name: Unit Test
-      script: yarn test
-
-    - name: Cucumber
-      script: docker-compose run cucumber yarn cucumber
+  - name: Lint
+    script: yarn lint
+  - name: Unit Test
+    script: yarn test
+  - name: Cucumber
+    script: docker-compose run cucumber yarn cucumber
+deploy:
+  provider: npm
+  email: nathan@ncjones.com
+  api_key:
+    secure: QdAnTrKeDRUfTQCltb/S5IeaKLqfK3yJiw/6mK4lytVTQtd78XMdryBUZrX2NSX03G4XWkzNW56g5wRh0R0sh1kZJakAbf+ULETkN43o2U2ULnOQgzx5VLqSdeiJueliyLs3c+Pi5p3YKD7VeuWKuVQeAkLk6CS2moyi3aZqo7GuMqyLpQAi3fRjj8ANey8fOCpeW8gYMRq1rP5DN1tH3533FPrI+RvoDRV4uy0cVbnm9OnmHIcynMQmiBUxoynRHO+/JC/hcr/YdANXHMrPpk2rIG6K2/CYFTdKH0LDmiJRYWqLOjrx55FBpWfZ7nnIpyb+L6L73vCxT9jPRBmvrl+kqN/nFkGNG/jZHuMSfAVhTJeycc5VFBa019ksTAHyPwf2MQV+7DMfXCWDsMwzMtSq2LHH8C4Qx047R/ndhxWtWJDD0uh5AjcIZBXlSrtv/lhRekNpVazZXwSQrraIa22ytGPRontXF15t8aNBmsVlNKZ54qAV5zPQd2kxvTgmw8PiJGCxG7uuJLRh9L5V407mGJbGC/KwvWpxkpdAeVsRonTqijgawath7VnymYVJFNsEdNgcafpaKJbaN/ryArcbUKHQTgtEVrhJ40tZF/o6/P5c4UsSn+T7LQmUEsIj03q9H4H0sY308BGBl4oY0J0AvUfeq6THbtdxW/49UDU=
+  on:
+    tags: true
+    repo: ncjones/mock-cmdr
