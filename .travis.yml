@@ -1,12 +1,22 @@
-dist: bionic
+language: node_js
+node_js:
+  - lts/*
+cache: yarn
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.22.4
+  - export PATH="$HOME/.yarn/bin:$PATH"
+
 jobs:
   include:
+    - stage: Prep
+      name: CI Info
+      script: scripts/ci-info.sh
 
-    - name: Lint
+    - stage: Test
+      name: Lint
       script: scripts/ci-lint.sh
 
     - name: Unit Test
-      script: docker-compose run script yarn lint
       script: scripts/ci-test.sh
 
     - name: Cucumber

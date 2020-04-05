@@ -1,6 +1,10 @@
 version: "3"
 services:
   cucumber:
-    build: .
+    image: node:12
+    volumes:
+      - $HOME/.cache/yarn/v6:/usr/local/share/.cache/yarn/v6
   script:
-    build: .
+    image: node:12
+    volumes:
+      - $HOME/.cache/yarn/v6:/usr/local/share/.cache/yarn/v6
