@@ -8,16 +8,12 @@ before_install:
 
 jobs:
   include:
-    - stage: Prep
-      name: CI Info
-      script: scripts/ci-info.sh
 
-    - stage: Test
-      name: Lint
-      script: scripts/ci-lint.sh
+    - name: Lint
+      script: yarn lint
 
     - name: Unit Test
-      script: scripts/ci-test.sh
+      script: yarn test
 
     - name: Cucumber
       script: scripts/ci-cucumber.sh
