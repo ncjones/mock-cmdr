@@ -5,6 +5,8 @@ services:
   cucumber:
     depends_on: [ wiremock ]
     working_dir: /work
+    volumes:
+      - .:/work
     command:
       - bash
       - -c
