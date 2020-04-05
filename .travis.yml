@@ -1,0 +1,13 @@
+dist: bionic
+jobs:
+  include:
+
+    - name: Lint
+      script: scripts/ci-lint.sh
+
+    - name: Unit Test
+      script: docker-compose run script yarn lint
+      script: scripts/ci-test.sh
+
+    - name: Cucumber
+      script: scripts/ci-cucumber.sh

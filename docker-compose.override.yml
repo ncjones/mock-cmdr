@@ -4,3 +4,7 @@ services:
     image: node:12
     volumes:
       - .:/work
+  script:
+    image: node:12
+    volumes:
+      - .:/work

@@ -2,3 +2,5 @@ version: "3"
 services:
   cucumber:
     build: .
+  script:
+    build: .
