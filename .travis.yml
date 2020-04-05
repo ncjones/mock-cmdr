@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - lts/*
+cache: yarn
+jobs:
+  include:
+
+    - name: Lint
+      script: yarn lint
+
+    - name: Unit Test
+      script: yarn test
+
+    - name: Cucumber
+      script: docker-compose run cucumber yarn cucumber

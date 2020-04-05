@@ -1,4 +1,7 @@
-# mock-cmdr
+# Mock Commander
+
+[![Build Status](https://travis-ci.org/ncjones/mock-cmdr.svg?branch=master)](https://travis-ci.org/ncjones/mock-cmdr)
+
 
 ### Run Unit Tests
 
