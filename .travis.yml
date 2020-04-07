@@ -10,6 +10,17 @@ jobs:
     script: yarn test
   - name: Cucumber
     script: docker-compose run cucumber yarn cucumber
+  - name: Docs
+    script: ./docs.sh
+    deploy:
+      provider: pages:git
+      local_dir: docs
+      fqdn: mock-cmdr.js.org
+      edge: true
+      on:
+        branch: master
+      token:
+        secure: "YH6QE4sPdu79lWhKHzXY+IMnnn9er183vDyqlMmN1iJA/gaMkLhkr7+WzO8NtU0Mqvv78Nkmzif7CfrO59Ei873sql4abOZPt93ZkGPln4Jdzj0ghFRu+XwN+ClikiP1DKNdFPyvDLqCj/VpajjwNftnkAYM4GXa/bp5XPSfszyEUcZGWlmC0g3YYCCrRz9niJp3VWC480g/AVmgMZjAxMY6yuBLRwU5A3EoExkzCp0SW2qXytN/1R4G1JffR1V/1DqTNBg0suljlmexra1RTIYRKZSwkCm7F1DAdbftF/zug5S/6EHRzwsCLtaGbUU7IkVfZyIQWjafz710HXlepca0leTbo56JAmSCDKDcmSf62S3Nmu8dGIeW4ItL/5twddrhSoZFl9P6NowoO0fi1ny8A/fRBcHpcVo2lDj5MfVxB7GUFUtFvXKiM9eFJL8xWuFv63qnjkQ8J51DKEi3PDGpFSE04ntjCkdw1qJsV7ga+yMlpP/aI4wqLrBIXoZ59eUN8hvjccPQEtjMblJBI/H9AEqNB4FsZcQorv3JHX1lfPnK5OI3GpUiXy5GB+SQ1n51KODeMoxEjLI+X+9/sanxCNVvOYjKR83pHzihE1edK6+uHhDIWJD6iggfFrQvmXiokH6M2JlZ7z5wWMhxQygZT2ARedyvabUj1Xb5tcE="
 deploy:
   provider: npm
   email: nathan@ncjones.com

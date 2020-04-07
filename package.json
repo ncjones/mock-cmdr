@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "test": "jest",
     "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
-    "cucumber": "cucumber-js"
+    "cucumber": "cucumber-js",
+    "jsdoc": "jsdoc --configure .jsdoc.json"
   },
   "devDependencies": {
     "convict": "^5.2.0",
@@ -19,6 +20,8 @@
     "eslint-plugin-jest": "^23.8.2",
     "factory-bot": "^6.1.4",
     "jest": "^25.2.4",
+    "jsdoc": "^3.6.4",
+    "jsdoc-fresh": "^1.0.2",
     "wait-on": "^4.0.1"
   },
   "dependencies": {
