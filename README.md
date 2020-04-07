@@ -18,7 +18,7 @@ npm install mock-cmdr
 
 Mock Commander can be simply used as a Wiremock rest API client:
 
-```
+```javascript
 const mockCmdr = require('mock-cmdr');
 mockCmdr.init({ baseUrl: 'http://wiremock' });
 mockCmdr.createMapping({
@@ -39,14 +39,14 @@ commands. If the mapping definintion above is moved into
 `${__dirname}/mock/stub/get-user-by-id.js` then the same create mapping call
 can be made by:
 
-```
+```javascript
 const user = { id: 1 };
 await mockCmdr.stub.getUserById(user);
 ```
 
 Commands are loaded by providing the `cmdDir` option to `mockCmdr.init()`:
 
-```
+```javascript
 const path = require('path');
 const mockCmdr = require('mock-cmdr');
 mockCmdr.init({
@@ -77,7 +77,7 @@ The following example demonstrates the layout of a command dir:
 
 The resulting commands after calling `mockCmdr.init({ cmdDir })` will be:
 
-```
+```javascript
 mockCmdr.stub.user.create()
 mockCmdr.stub.user.getById()
 mockCmdr.find.user.createByEmail()
@@ -85,7 +85,7 @@ mockCmdr.find.user.createByEmail()
 
 ### Example Stub Command
 
-```
+```javascript
 /**
  * @returns {WiremockStubMapping}
  */
@@ -104,7 +104,7 @@ module.exports = function(user) {
 
 ### Example Find Command
 
-```
+```javascript
 /**
  * @returns {WiremockRequestCriteria}
  */
