@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+      Home - Documentation
+  </title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+  <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+  
+
+  
+</head>
+
+<body>
+  <svg style="display: none;">
+    <defs>
+      <symbol id="linkIcon" fill="#706d77" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="navicon-button x">
+    <div class="navicon"></div>
+  </label>
+
+  <label for="nav-trigger" class="overlay"></label>
+
+  <div class="top-nav-wrapper">
+    <ul>
+      <li  class="active" >
+        <a href="index.html">
+          
+          
+            <svg fill="#0095dd" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+          
+        </a>
+      </li>
+
+      
+
+    </ul>
+  </div>
+
+  <nav>
+    <h3 class="reference-title">
+      Mock Commander
+    </h3>
+
+    
+
+    <h3>Modules</h3><ul><li id="mock-cmdr-nav"><a href="module-mock-cmdr.html">mock-cmdr</a><ul class='methods'><li data-type="method" id="mock-cmdr-init-nav"><a href="module-mock-cmdr.html#.init">init()</a></li><li data-type="method" id="mock-cmdr-reset-nav"><a href="module-mock-cmdr.html#.reset">reset()</a></li><li data-type="method" id="mock-cmdr-defineCmd-nav"><a href="module-mock-cmdr.html#.defineCmd">defineCmd()</a></li><li data-type="method" id="mock-cmdr-loadCmds-nav"><a href="module-mock-cmdr.html#.loadCmds">loadCmds()</a></li><li data-type="method" id="mock-cmdr-createMapping-nav"><a href="module-mock-cmdr.html#.createMapping">createMapping()</a></li><li data-type="method" id="mock-cmdr-findRequests-nav"><a href="module-mock-cmdr.html#.findRequests">findRequests()</a></li><li data-type="method" id="mock-cmdr-cleanUp-nav"><a href="module-mock-cmdr.html#.cleanUp">cleanUp()</a></li></ul></li></ul><h3 id="global-nav"></h3>
+  </nav>
+
+  <div id="main">
+    
+
+    
+      
+
+
+
+    
+
+      
+
+
+  <section class="readme">
+    <article>
+      <h1>Mock Commander</h1>
+<p><a href="https://travis-ci.org/ncjones/mock-cmdr"><img src="https://travis-ci.org/ncjones/mock-cmdr.svg?branch=master" alt="Build Status"></a></p>
+<p>Wiremock client for Node JS which promotes separation of dynamic mocking
+commands from test code logic.</p>
+<h2>Installation</h2>
+<pre class="prettyprint source"><code>npm install mock-cmdr
+</code></pre>
+<h2>Usage</h2>
+<p>Mock Commander can be simply used as a Wiremock rest API client:</p>
+<pre class="prettyprint source"><code>const mockCmdr = require('mock-cmdr');
+mockCmdr.init({ baseUrl: 'http://wiremock' });
+mockCmdr.createMapping({
+  request: {
+    method: 'GET',
+    urlPath: '/user/1',
+  },
+  response: {
+    jsonBody: {
+      id: 1
+    }
+  },
+});
+</code></pre>
+<p>However, Mock Commander's real utility comes from defining templated Wiremock
+commands. If the mapping definintion above is moved into
+<code>${__dirname}/mock/stub/get-user-by-id.js</code> then the same create mapping call
+can be made by:</p>
+<pre class="prettyprint source"><code>const user = { id: 1 };
+await mockCmdr.stub.getUserById(user);
+</code></pre>
+<p>Commands are loaded by providing the <code>cmdDir</code> option to <code>mockCmdr.init()</code>:</p>
+<pre class="prettyprint source"><code>const path = require('path');
+const mockCmdr = require('mock-cmdr');
+mockCmdr.init({
+  baseUrl: wiremockBaseUrl,
+  cmdDir: path.resolve(__dirname, 'mock'),
+});
+</code></pre>
+<p>See the <a href="https://github.com/ncjones/mock-cmdr/tree/master/features/">Mock Commander Cucumber Test Suite</a> for a full example demonstrating
+how to define and use templated Wiremock commands with Cucumber.</p>
+<h3>Command Dir Layout</h3>
+<p>The following example demonstrates the layout of a command dir:</p>
+<pre class="prettyprint source"><code>[cmdDir]
+  |- stub
+  |  |- user
+  |     |- create.js
+  |     |- get-by-id.js
+  |
+  |- find
+     |- user
+        |- create-by-email.js
+</code></pre>
+<p>The resulting commands after calling <code>mockCmdr.init({ cmdDir })</code> will be:</p>
+<pre class="prettyprint source"><code>mockCmdr.stub.user.create()
+mockCmdr.stub.user.getById()
+mockCmdr.find.user.createByEmail()
+</code></pre>
+<h3>Example Stub Command</h3>
+<pre class="prettyprint source"><code>/**
+ * @returns {WiremockStubMapping}
+ */
+module.exports = function(user) {
+  return {
+    request: {
+      method: 'GET',
+      urlPath: `/user/${user.id}`,
+    },
+    response: {
+      jsonBody: user.toApiModel(),
+    },
+  };
+};
+</code></pre>
+<h3>Example Find Command</h3>
+<pre class="prettyprint source"><code>/**
+ * @returns {WiremockRequestCriteria}
+ */
+module.exports = function(user) {
+  return {
+    method: 'GET',
+    urlPath: `/user/${user.id}`,
+  };
+};
+</code></pre>
+<h2>API Summary</h2>
+<h3>mock-cmdr module</h3>
+<h4>.init(options)</h4>
+<p>Initialize the Mock Commander session. If <code>cmdDir</code> is specified then
+<code>loadCmds()</code> will also be called.</p>
+<p><strong>options:</strong></p>
+<ul>
+<li><strong>baseUrl</strong> (string) - the mock server base URL, eg: <code>http://wiremock:8080</code>.</li>
+<li><strong>cmdDir</strong> (string) - the dir to load commands from.</li>
+</ul>
+<h4>.defineCmd(command)</h4>
+<p>Define a templated mocking command that will be available via
+<code>mockCmdr.{type}.{path}</code> or <code>mockCmdr.{type}.{name}</code>. When the command is
+invoked then <code>createMapping()</code> or <code>findRequests()</code> will be called with the
+output of the command's template function.</p>
+<p><strong>command:</strong></p>
+<ul>
+<li><strong>type</strong> (string) - <code>&quot;stub&quot;</code> or <code>&quot;find&quot;</code>.</li>
+<li><strong>path</strong> (string[]) - the path the command will be available at within
+<code>mockCmdr.stub</code> or <code>mockCmdr.find</code>.</li>
+<li><strong>name</strong> (string) - shorthand for <code>{ path: [ name ] }</code></li>
+<li><strong>template</strong> (function) - A function that returns either a &quot;find requests&quot; criteria or a
+&quot;stub mapping&quot; definition.</li>
+</ul>
+<h4>.loadCmds(dir)</h4>
+<p>Load all &quot;find&quot; and &quot;stub&quot; mocking commands by searching recursively
+within baseDir.</p>
+<p>The discovered commands will be passed to <code>defineCmd()</code> using the camel
+cased file names as the command path. Modules found within a &quot;find&quot;
+directory are treated as &quot;find&quot; commands and modules found within a
+&quot;stub&quot; directory are treated as &quot;stub&quot; commands. Modules not within a
+&quot;find&quot; or &quot;stub&quot; directory are ignored.</p>
+<p>Any intermediate directories other than &quot;find&quot; and &quot;stub&quot; will be
+treated as namespaces. Namespaces can be arbitrarily deep and are also
+camel cased. The &quot;find&quot; and &quot;stub&quot; dirs are excluded from the namespace
+and need not appear at the top level allowing related commands to be
+grouped appropriately.</p>
+<h4>.createMapping(mapping)</h4>
+<p><em>async</em></p>
+<p>Call the <a href="http://wiremock.org/docs/api/#tag/Stub-Mappings/paths/~1__admin~1mappings/post">Wiremock Stub Mapping API</a>.</p>
+<h4>.findRequests(criteria)</h4>
+<p><em>async</em></p>
+<p>Call the <a href="http://wiremock.org/docs/api/#tag/Requests/paths/~1__admin~1requests~1find/post">Wiremock Find Requests API</a>.</p>
+<h4>.stub</h4>
+<p>Access to &quot;stub&quot; commands registered via <code>mockCmdr.defineCmd()</code>.</p>
+<h4>.find</h4>
+<p>Access to &quot;find&quot; commands registered via <code>mockCmdr.defineCmd()</code>.</p>
+<h4>.cleanUp()</h4>
+<p><em>async</em></p>
+<p>Remove stub mappings from the Wiremock server that have been created by the
+current session.</p>
+<h2>Legal</h2>
+<p>Copyright 2020 Nathan Jones. Licensed under the Apache License, Version 2.0.</p>
+    </article>
+  </section>
+
+
+    
+
+
+  </div>
+
+  <br class="clear">
+
+  <footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a>
+  </footer>
+
+  <script src="scripts/linenumber.js"></script>
+  
+
+  
+
+</body>
+</html>
