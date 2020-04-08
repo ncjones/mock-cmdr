@@ -1,5 +1,0 @@
-*.sw[a-p]
-.idea
-node_modules
-mitmproxy/mitmproxy-*
-docs
