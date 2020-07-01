@@ -13,6 +13,10 @@ commands from test code logic.
 npm install mock-cmdr
 ```
 
+## Documentation
+
+https://mock-cmdr.js.org/
+
 
 ## Usage
 
