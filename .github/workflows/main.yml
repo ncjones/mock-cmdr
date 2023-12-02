@@ -3,6 +3,7 @@ on:
   pull_request: { branches: [ master ] }
 
 jobs:
+
   test:
     runs-on: ubuntu-latest
     steps:
@@ -12,6 +13,7 @@ jobs:
       - run: corepack enable
       - run: yarn install --immutable
       - run: yarn test --ci
+
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -21,3 +23,15 @@ jobs:
       - run: corepack enable
       - run: yarn install --immutable
       - run: yarn lint
+
+  cucumber:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with: { node-version: '18.x', cache: yarn }
+      - run: corepack enable
+      - run: yarn install --immutable
+      - run: docker-compose
+          -f ./docker-compose.yml
+          run cucumber yarn cucumber
