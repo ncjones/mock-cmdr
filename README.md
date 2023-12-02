@@ -1,8 +1,5 @@
 # Mock Commander
 
-[![Build Status](https://travis-ci.org/ncjones/mock-cmdr.svg?branch=master)](https://travis-ci.org/ncjones/mock-cmdr)
-
-
 Wiremock client for Node JS which promotes separation of dynamic mocking
 commands from test code logic.
 
