@@ -6,6 +6,7 @@
   "repository": "git@github.com:ncjones/mock-cmdr.git",
   "author": "Nathan Jones <nathan@ncjones.com>",
   "license": "Apache-2.0",
+  "packageManager": "yarn@4.0.2",
   "scripts": {
     "lint": "eslint .",
     "test": "jest",
@@ -19,6 +20,7 @@
     "eslint-plugin-jest": "^23.8.2",
     "factory-bot": "^6.1.4",
     "jest": "^26.6",
+    "lodash.get": "^4.4.2",
     "wait-on": "^4.0.1"
   },
   "dependencies": {
