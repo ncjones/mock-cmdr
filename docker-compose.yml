@@ -1,13 +1,16 @@
 version: "3"
 services:
+
   wiremock:
-    image: rodolpheche/wiremock
+    init: true
+    image: wiremock/wiremock
+
   cucumber:
-    image: node:12
+    build: .
+    init: true
     depends_on: [ wiremock ]
     working_dir: /work
-    volumes:
-      - .:/work
+    volumes: [ .:/work ]
     command:
       - bash
       - -c
