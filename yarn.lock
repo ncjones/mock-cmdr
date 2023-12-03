@@ -3770,6 +3770,8 @@ __metadata:
     jest: "npm:^29.7.0"
     lodash.get: "npm:^4.4.2"
     wait-on: "npm:^7.2.0"
+  peerDependencies:
+    axios: "*"
   languageName: unknown
   linkType: soft
 
