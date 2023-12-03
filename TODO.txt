@@ -1,0 +1,54 @@
+
+# Goal
+
+Type hints for the stub/find definitions and invocations.
+
+# Ideas
+
+## Idea #1
+
+Assessment: Inadequate
+
+Type hints are probably achievable in client codebases without any changes to
+mock-cmdr by using typescript `declare` statements. The drawbacks with this
+approach are:
+
+ * clients need to declare the stub/find commands twice (once as
+   javascript functions and again as typescript declarations).
+ * there's still no type hints within the javascript declaration.
+
+
+## Idea #2
+
+Assessment: Feasible
+
+Allow stub/find functions to be declared staticly instead of dynamically so
+that typescript typehints work everywhere. This will require changing mock-cmdr
+so that commands can be instantiated directly by clients.
+
+
+
+
+// mock/foo/myCommand.ts
+// https://stackoverflow.com/questions/28998417/create-a-generic-function-returning-a-function-with-the-same-signature
+export const stubMyCommand = mockCmdr.defineStubCommand(function(args) {
+  const mapping: WiremockStubMapping = {
+    //...
+  };
+  return mapping;
+});
+
+// mock/foo/index.ts
+import { stubMyCommand } from './stubMyCommand';
+import { findMyCommand } from './findMyCommand';
+export const foo = {
+  stubMyCommand,
+  findMyCommand,
+});
+
+
+// mock/index.ts
+import { foo } from './foo';
+export const mocks = {
+  foo,
+}
