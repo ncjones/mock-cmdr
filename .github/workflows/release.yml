@@ -5,13 +5,14 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+      - run: corepack enable
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: '14.x'
+          node-version: '18.x'
           cache: yarn
           registry-url: 'https://registry.npmjs.org'
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --immutable
       - run: scripts/version-tag-validate.js ${{ github.ref }}
       - run: npm publish --access public
         env:

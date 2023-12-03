@@ -26,9 +26,3 @@ docker-compose run cucumber yarn cucumber
 ```
 
 HTTP traffic will be visible from the Mitmweb UI.
-
-
-### Publishing
-
-Tagged commits are automatically published by the Travis pipeline. The tag name
-should match the version in package.json.
